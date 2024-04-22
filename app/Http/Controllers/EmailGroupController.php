@@ -9,6 +9,7 @@ class EmailGroupController extends Controller
 {
     public function index()
     {
+        // get all email groups
         $emailGroups = EmailGroup::latest()->get(['id', 'name', 'slug']);
 
         return $emailGroups;
