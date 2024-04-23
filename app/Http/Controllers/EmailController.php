@@ -33,22 +33,13 @@ class EmailController extends Controller
                 'subject' => $request->subject,
                 'message' => $request->message,
             ]);
-        }
 
-        // send email to each email
-        foreach ($emails as $email) {
             $content = [
                 'subject' => $request->subject,
                 'message' => $request->message,
             ];
 
             Mail::to($email)->queue(new SendEmail($content));
-
-            if( count(Mail::failures()) > 0 ) {
-                return response()->json([
-                    'message' => "Email failed to send",
-                ], Response::HTTP_BAD_REQUEST);
-            }
         }
 
         // return response
